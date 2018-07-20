@@ -34,7 +34,10 @@ pipeline {
         stage('Build and Package') {
             steps {
                 container('angular-cli') {
-                    sh "ng build"
+                    sh """
+                    npm install
+                    ng build
+                    """
                     archiveArtifacts 'dist/*'
                 }
             }

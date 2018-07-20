@@ -1,0 +1,43 @@
+library identifier: 'pipeline-library@master', retriever: modernSCM(
+    [$class: 'GitSCMSource', 
+    credentialsId: '', 
+    id: 'pipeline-library', 
+    remote: 'https://github.com/devopspatterns/pipeline-library.git', 
+    traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]
+]) 
+
+//@Library('github.com/devopspatterns/pipeline-library@master')
+//def pipeline = new com.devopspatterns.Pipeline()
+//
+
+
+pipeline {
+    agent {
+        kubernetes {
+            label 'kubernetes'
+            containerTemplate {
+                name 'angular-cli'
+                image 'alexsuch/angular-cli:1.7.3'
+                ttyEnabled true
+                command 'cat'
+            }
+        }
+    }
+    
+    options {
+        // General Jenkins job properties
+        buildDiscarder(logRotator(numToKeepStr:'6'))
+    }
+
+    stages {
+        
+        stage('Build and Package') {
+            steps {
+                container('angular-cli') {
+                    sh "ng build"
+                    archiveArtifacts 'dist/*'
+                }
+            }
+        }
+    }
+}

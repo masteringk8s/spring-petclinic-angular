@@ -33,6 +33,7 @@ pipeline {
                       npm install
                       ng build
                       ls -la
+                      jq --help
                     """
                     archiveArtifacts 'dist/**'
                 }

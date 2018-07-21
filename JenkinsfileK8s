@@ -6,11 +6,6 @@ library identifier: 'pipeline-library@master', retriever: modernSCM(
     traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]
 ]) 
 
-//@Library('github.com/devopspatterns/pipeline-library@master')
-//def pipeline = new com.devopspatterns.Pipeline()
-//
-
-
 pipeline {
     agent {
         kubernetes {
@@ -26,7 +21,7 @@ pipeline {
     
     options {
         // General Jenkins job properties
-        buildDiscarder(logRotator(numToKeepStr:'6'))
+        buildDiscarder(logRotator(numToKeepStr:'5'))
     }
 
     stages {
@@ -35,12 +30,11 @@ pipeline {
             steps {
                 container('angular-cli') {
                     sh """
-                    npm install
-                    ng build
-                    ls -la
+                      npm install
+                      ng build
+                      ls -la
                     """
                     archiveArtifacts 'dist/**'
-                    archiveArtifacts 'node_modules/**'
                 }
             }
         }

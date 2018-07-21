@@ -12,7 +12,7 @@ pipeline {
             label 'kubernetes'
             containerTemplate {
                 name 'angular-cli'
-                image 'alexsuch/angular-cli:1.7.3'
+                image 'emcconne/angular-cli:latest'
                 ttyEnabled true
                 command 'cat'
             }

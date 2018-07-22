@@ -31,7 +31,7 @@ pipeline {
                 container('angular-cli') {
                     sh """
                       npm install
-                      ng build
+                      ng build --environment=production
                     """
                     archiveArtifacts 'dist/**'
                     publishNodeEvent()

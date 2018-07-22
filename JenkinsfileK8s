@@ -32,8 +32,6 @@ pipeline {
                     sh """
                       npm install
                       ng build
-                      ls -la
-                      jq --help
                     """
                     archiveArtifacts 'dist/**'
                     publishNodeEvent()

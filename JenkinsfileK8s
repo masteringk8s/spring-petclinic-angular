@@ -32,6 +32,7 @@ pipeline {
                     sh """
                       npm install
                       ng build --environment=prod
+                      env
                     """
                     archiveArtifacts 'dist/**'
                     publishAngularApp()

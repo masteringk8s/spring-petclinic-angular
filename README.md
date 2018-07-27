@@ -30,7 +30,7 @@ npm install --save-dev @angular/cli@latest
 if npm version > 5.0 delete package-lock.json file  ( bug in npm 5.0 - this file prevent correct packages install)
 npm install
 ````
-
+Check it out.
 Now project use Angular CLI v.1.7.4 and Angular v.5.2.5
 You can see current dependencies in package.json file.
 

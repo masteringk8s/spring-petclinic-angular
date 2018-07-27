@@ -35,7 +35,6 @@ pipeline {
                       env
                     """
                     archiveArtifacts 'dist/**'
-                    publishAngularApp()
                     publishNodeEvent()
                 }
             }
@@ -43,18 +42,3 @@ pipeline {
     }
 }
 
-def publishAngularApp() {
-    echo "Publishing application for Angular build"
-    try {
-        def json = readJSON file: 'package.json'
-        VERSION = json['version']
-        APP_NAME = json['name']
-       
-        echo "Building $APP_NAME"
-        echo "Building Version=$VERSION"
-        
-    } catch (e) {
-        echo "Cannot access package.json file"
-        throw e
-    }
-}
